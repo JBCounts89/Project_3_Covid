@@ -21,8 +21,11 @@ HTML/CSS: The frontend of the application is built using HTML and CSS to create 
 Visit the United States COVID-19 Vaccination Tracker website (add URL).
 Explore the available visualizations:
 * Total Vaccinations Over Time: This line chart provides an overview of the total number of vaccinations administered over a period of time.
+* ![image](https://github.com/kalashnikovkid/Project_3_Covid/assets/117128707/8a85ead0-36d6-434b-8ddf-9a3a9daa0b28)
 * Daily Vaccinations by State: This bar chart displays the daily vaccination numbers for each state, allowing for comparisons.
+* ![newplot (1)](https://github.com/kalashnikovkid/Project_3_Covid/assets/117128707/28b5dac3-98c0-49a6-8e90-fff1ed02542e)
 * Vaccination Rates by State: This choropleth map visualizes the vaccination rates across different states using color gradients.
+* ![image](https://github.com/kalashnikovkid/Project_3_Covid/assets/117128707/a46b6052-5ba6-4d83-aa59-6f2fe70b3411)
 * Interact with the visualizations to gain deeper insights:
 Hover over data points to view specific information.
 Zoom in/out, pan, or reset the visualizations for a customized view.
