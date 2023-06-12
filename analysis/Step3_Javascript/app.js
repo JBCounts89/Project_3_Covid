@@ -7,6 +7,7 @@ function fetchData(url) {
     });
 }
 
+// Extract a specific key from each row of data
 function unpack(rows, key) {
   return rows.map(function(row) { return row[key]; });
 }
@@ -89,35 +90,33 @@ function generateMap(data) {
     VaccinationRate: row["Vaccination Rate"]
   }));
 
-  let state_count = {}
+  // Calculate the average vaccination rate per state
+  let state_count = {};
+  let filtered_data = {};
 
-  let filtered_data = {}
-
-  for(let i = 0; i < mapData.length; i++){
-    if(mapData[i].VaccinationRate){
-      if(filtered_data[mapData[i].State] == undefined){
-        filtered_data[mapData[i].State] = 0
+  for (let i = 0; i < mapData.length; i++) {
+    if (mapData[i].VaccinationRate) {
+      if (filtered_data[mapData[i].State] == undefined) {
+        filtered_data[mapData[i].State] = 0;
       }
-      if(state_count[mapData[i].State] == undefined){
-        state_count[mapData[i].State] = 0
+      if (state_count[mapData[i].State] == undefined) {
+        state_count[mapData[i].State] = 0;
       }
-      state_count[mapData[i].State] += 1
-      filtered_data[mapData[i].State] += mapData[i].VaccinationRate
+      state_count[mapData[i].State] += 1;
+      filtered_data[mapData[i].State] += mapData[i].VaccinationRate;
     }
   }
 
-  console.log(filtered_data)
+  // Calculate the average vaccination rate per state
+  let output_list = [];
 
-  output_list = []
-
-  for( key in filtered_data){
-    filtered_data[key] = (filtered_data[key]/state_count[key])
+  for (key in filtered_data) {
+    filtered_data[key] = filtered_data[key] / state_count[key];
     output_list.push({
       State: key,
       VaccinationRate: filtered_data[key]
-    })
+    });
   }
-
 
   // Set up the map layout
   let layout = {
@@ -132,30 +131,29 @@ function generateMap(data) {
     }
   };
 
-  console.log(output_list)
-
-  console.log(unpack(output_list, 'State'))
-  console.log(unpack(output_list, 'VaccinationRate'))
-
   // Create the map trace
-  let output_data = [{
-    type: "choropleth",
-    locations: unpack(output_list, 'State'),
-    z: unpack(output_list, 'VaccinationRate'),
-    locationmode: "USA-states",
-    colorscale: [
-      [0, 'rgb(242,240,247)'], [0.2, 'rgb(218,218,235)'],
-      [0.4, 'rgb(188,189,220)'], [0.6, 'rgb(158,154,200)'],
-      [0.8, 'rgb(117,107,177)'], [1, 'rgb(84,39,143)']
-    ],
-    colorbar: {
-      title: "Vaccination Rate"
-    }
-  }];
+let output_data = [{
+  type: "choropleth",
+  locations: unpack(output_list, 'State'),
+  z: unpack(output_list, 'VaccinationRate'),
+  locationmode: "USA-states",
+  colorscale: [
+    [0, 'rgb(204, 229, 255)'],  // Lightest shade of blue
+    [0.2, 'rgb(153, 204, 255)'],
+    [0.4, 'rgb(102, 178, 255)'],
+    [0.6, 'rgb(51, 153, 255)'],
+    [0.8, 'rgb(0, 128, 255)'],
+    [1, 'rgb(0, 102, 204)']      // Darkest shade of blue
+  ],
+  colorbar: {
+    title: "Vaccination Rate"
+  }
+}];
 
   // Generate the map visualization
   Plotly.newPlot("choroplethMap", output_data, layout);
 }
+
 // Event listener for the button click
 d3.select("#button").on("click", function() {
   // Fetch the data from the Flask API
@@ -181,7 +179,7 @@ d3.select("#button").on("click", function() {
     });
 });
 
-
+// State codes mapping
 const stateCodes = {
   Alabama: "AL",
   Alaska: "AK",
