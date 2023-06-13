@@ -25,7 +25,7 @@ Explore the available visualizations:
 * Daily Vaccinations by State: This bar chart displays the daily vaccination numbers for each state, allowing for comparisons.
 * ![newplot (1)](https://github.com/kalashnikovkid/Project_3_Covid/assets/117128707/28b5dac3-98c0-49a6-8e90-fff1ed02542e)
 * Vaccination Rates by State: This choropleth map visualizes the vaccination rates across different states using color gradients.
-* ![image](https://github.com/kalashnikovkid/Project_3_Covid/assets/117128707/a46b6052-5ba6-4d83-aa59-6f2fe70b3411)
+* ![image](https://github.com/kalashnikovkid/Project_3_Covid/assets/117128707/2ba14eab-42ee-4d0a-8fb8-0bf427209695)
 * Interact with the visualizations to gain deeper insights:
 Hover over data points to view specific information.
 Zoom in/out, pan, or reset the visualizations for a customized view.
