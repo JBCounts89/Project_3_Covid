@@ -118,6 +118,8 @@ function generateMap(data) {
     });
   }
 
+  console.log(output_list); // Display average vaccination rates in the console
+
   // Set up the map layout
   let layout = {
     title: "Vaccination Rates by State",
@@ -132,23 +134,23 @@ function generateMap(data) {
   };
 
   // Create the map trace
-let output_data = [{
-  type: "choropleth",
-  locations: unpack(output_list, 'State'),
-  z: unpack(output_list, 'VaccinationRate'),
-  locationmode: "USA-states",
-  colorscale: [
-    [0, 'rgb(204, 229, 255)'],  // Lightest shade of blue
-    [0.2, 'rgb(153, 204, 255)'],
-    [0.4, 'rgb(102, 178, 255)'],
-    [0.6, 'rgb(51, 153, 255)'],
-    [0.8, 'rgb(0, 128, 255)'],
-    [1, 'rgb(0, 102, 204)']      // Darkest shade of blue
-  ],
-  colorbar: {
-    title: "Vaccination Rate"
-  }
-}];
+  let output_data = [{
+    type: "choropleth",
+    locations: unpack(output_list, 'State'),
+    z: unpack(output_list, 'VaccinationRate'),
+    locationmode: "USA-states",
+    colorscale: [
+      [0, 'rgb(204, 229, 255)'],  // Lightest shade of blue
+      [0.2, 'rgb(153, 204, 255)'],
+      [0.4, 'rgb(102, 178, 255)'],
+      [0.6, 'rgb(51, 153, 255)'],
+      [0.8, 'rgb(0, 128, 255)'],
+      [1, 'rgb(0, 102, 204)']      // Darkest shade of blue
+    ],
+    colorbar: {
+      title: "Vaccination Rate"
+    }
+  }];
 
   // Generate the map visualization
   Plotly.newPlot("choroplethMap", output_data, layout);
@@ -159,7 +161,7 @@ d3.select("#button").on("click", function() {
   // Fetch the data from the Flask API
   fetchData("http://127.0.0.1:5000/data")
     .then(data => {
-      console.log(data)
+      console.log(data);
       // Generate the selected visualization based on the fetched data
       let visualization = document.getElementById("visualization").value;
       switch (visualization) {
@@ -170,7 +172,6 @@ d3.select("#button").on("click", function() {
           generateBarChart(data);
           break;
         case "choroplethMap":
-          console.log("here")
           generateMap(data);
           break;
         default:
